@@ -5,6 +5,7 @@ namespace GemstonesDefense.Content.Cabochon;
 
 public class CabochonBladeItem : ModItem
 {
+    private int comboCount = 0;
     /// <inheritdoc/> 
     public override string Texture => Assets.Images.Content.Cabochon.CabochonBladeItem.KEY;
 
@@ -73,8 +74,6 @@ public class CabochonBladeProjectile : ModProjectile
 {
     private Player Player => Main.player[Projectile.owner];
 
-    private int comboCount = 0;
-
     /// <inheritdoc/> 
     public override string Texture => Assets.Images.Content.Cabochon.CabochonBladeItem.KEY;
 
@@ -119,7 +118,15 @@ public class CabochonBladeProjectile : ModProjectile
         float start;
         float end;
 
-              
+        if (Projectile.ai[0] == 0f) {
+            start = MathHelper.ToRadians(-45f) * direction;
+            end = MathHelper.ToRadians(135f) * direction;
+        }
+        else
+        {
+            start = MathHelper.ToRadians(135f) * direction;
+            end = MathHelper.ToRadians(-45f) * direction;
+        }
 
         var left = direction == -1;
         

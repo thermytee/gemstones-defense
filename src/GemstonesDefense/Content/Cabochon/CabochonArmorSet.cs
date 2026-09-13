@@ -6,13 +6,13 @@ namespace GemstonesDefense.Content.Cabochon;
 
 public sealed class CabochonCowlDrawLayer : PlayerDrawLayer
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.armor[0].type == ModContent.ItemType<CabochonCowlItem>() && drawInfo.drawPlayer.direction == -1;
-    
-    /// <inheritdoc/>
+
+    /// <inheritdoc />
     public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.Head);
-    
-    /// <inheritdoc/>
+
+    /// <inheritdoc />
     protected override void Draw(ref PlayerDrawSet drawInfo)
     {
         var texture = Assets.Images.Content.Cabochon.CabochonCowlItem_Head_Alt.Asset.Value;
@@ -47,10 +47,15 @@ public sealed class CabochonCowlDrawLayer : PlayerDrawLayer
 public sealed class CabochonCowlPlayer : ModPlayer
 {
     /// <summary>
-    ///     
+    ///     Gets a value indicating whether the effects of the Cabochon Cowl are enabled.
     /// </summary>
+    /// <value>
+    ///     <see langword="true" /> if the effects of the Cabochon Cowl are enabled; otherwise,
+    ///     <see langword="false" />.
+    /// </value>
     public bool Enabled { get; set; }
-    
+
+    /// <inheritdoc />
     public override void ResetEffects()
     {
         base.ResetEffects();
@@ -62,10 +67,23 @@ public sealed class CabochonCowlPlayer : ModPlayer
 [AutoloadEquip(EquipType.Head)]
 public class CabochonCowlItem : ModItem
 {
-    /// <inheritdoc/>
+    /// <summary>
+    ///     The name used to identify the tooltip line for the Cabochon Cowl's ability.
+    /// </summary>
+    /// <remarks>
+    ///     This name is used when creating the <see cref="TooltipLine" /> in <see cref="ModifyTooltips" />.
+    /// </remarks>
+    public const string TOOLTIP_LINE_NAME = $"{nameof(CabochonCowlItem)}:Ability";
+
+    /// <summary>
+    ///     The amount of luck increase provided by the Cabochon Cowl.
+    /// </summary>
+    public const float LUCK_INCREASE = 0.01f;
+
+    /// <inheritdoc />
     public override string Texture => Assets.Images.Content.Cabochon.CabochonCowlItem.KEY;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void SetDefaults()
     {
         base.SetDefaults();
@@ -78,17 +96,17 @@ public class CabochonCowlItem : ModItem
         Item.rare = ItemRarityID.Green;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void UpdateEquip(Player player)
     {
         base.UpdateEquip(player);
 
-        player.luck += 0.01f;
-        
+        player.luck += LUCK_INCREASE;
+
         player.GetModPlayer<CabochonCowlPlayer>().Enabled = true;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void AddRecipes()
     {
         base.AddRecipes();
@@ -100,12 +118,12 @@ public class CabochonCowlItem : ModItem
             .Register();
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
         base.ModifyTooltips(tooltips);
 
-        var line = new TooltipLine(Mod, $"{nameof(CabochonCowlItem)}:Ability", this.GetLocalizedValue("Ability"))
+        var line = new TooltipLine(Mod, TOOLTIP_LINE_NAME, this.GetLocalizedValue("Ability"))
         {
             OverrideColor = new Color(112, 144, 219)
         };
@@ -117,10 +135,10 @@ public class CabochonCowlItem : ModItem
 [AutoloadEquip(EquipType.Legs)]
 public class CabochonBootsItem : ModItem
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override string Texture => Assets.Images.Content.Cabochon.CabochonBootsItem.KEY;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void SetDefaults()
     {
         base.SetDefaults();
@@ -129,11 +147,11 @@ public class CabochonBootsItem : ModItem
         Item.height = 20;
 
         Item.defense = 10;
-    
+
         Item.rare = ItemRarityID.Green;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void AddRecipes()
     {
         base.AddRecipes();
@@ -149,10 +167,10 @@ public class CabochonBootsItem : ModItem
 [AutoloadEquip(EquipType.Body)]
 public class CabochonChestplateItem : ModItem
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override string Texture => Assets.Images.Content.Cabochon.CabochonChestplateItem.KEY;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void SetDefaults()
     {
         base.SetDefaults();
@@ -165,7 +183,7 @@ public class CabochonChestplateItem : ModItem
         Item.rare = ItemRarityID.Green;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override void AddRecipes()
     {
         base.AddRecipes();

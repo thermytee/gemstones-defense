@@ -55,7 +55,7 @@ public sealed class OnyxArmorPlayer : ModPlayer
 
         if (Player.HasBuff<OnyxArmorBuff>())
         {
-            if (!InputUtils.IsKeyDown(Keys.W))
+            if (!InputUtilities.Keyboard.Pressed(Keys.W))
             {
                 Player.TryRemoveBuff<OnyxArmorBuff>();
 

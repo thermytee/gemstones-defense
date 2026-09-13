@@ -39,14 +39,16 @@ public class RubyRoostItem : ModItem
 
 public class OnyxOwlBuff : ModBuff
 {
+    /// <inheritdoc/> 
     public override void SetStaticDefaults()
     {
         base.SetStaticDefaults();
 
-        Main.buffNoTimeDisplay[Type] = true;
         Main.lightPet[Type] = true;
+        Main.buffNoTimeDisplay[Type] = true;
     }
 
+    /// <inheritdoc/> 
     public override void Update(Player player, ref int buffIndex)
     {
         base.Update(player, ref buffIndex);

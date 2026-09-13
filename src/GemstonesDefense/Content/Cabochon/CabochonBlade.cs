@@ -39,15 +39,6 @@ public class CabochonBladeItem : ModItem
         Item.shoot = ModContent.ProjectileType<CabochonBladeProjectile>();
     }
 
-    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-    {
-        Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, ai0: comboCount);
-
-        comboCount = comboCount == 0 ? 1 : 0;
-
-        return false;
-    }
-
     /// <inheritdoc/> 
     public override void AddRecipes()
     {
@@ -93,51 +84,6 @@ public class CabochonBladeProjectile : ModProjectile
     {
         base.AI();
 
-        var alive = Player.active && !Player.dead && !Player.ghost;
-
-        if (!alive)
-        {
-            Projectile.Kill();
-            return;
-        }
-        
-        var progress = Player.itemTime / (float)Player.itemTimeMax;
-
-        if (progress <= 0f)
-        {
-            Projectile.Kill();
-            return;
-        }
-
-        Player.heldProj = Projectile.whoAmI;
-
-        var direction = Player.direction;
-
-        Projectile.direction = direction;
-        Projectile.spriteDirection = direction;
-
-        float start;
-        float end;
-
-              
-
-        var left = direction == -1;
-        
-        if (left)
-        {
-            start -= MathHelper.Pi;
-            end += MathHelper.Pi;
-        }
-
-        var ease = progress * progress * progress;
-        
-        Projectile.scale = MathHelper.Lerp(1.2f, 0.8f, 1f - ease);
-        Projectile.rotation = Utils.AngleLerp(start, end, left ? ease : 1f - ease);
-        
-        Projectile.Center = Player.MountedCenter + (Projectile.rotation - MathHelper.PiOver2).ToRotationVector2() * 48f;
-        
-        Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Quarter, Projectile.rotation + MathHelper.Pi);
-        Player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation + MathHelper.Pi + MathHelper.PiOver4 * direction);
     }
 
     /// <inheritdoc/> 

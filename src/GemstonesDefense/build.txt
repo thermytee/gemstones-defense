@@ -1,9 +1,8 @@
 displayName = Gemstones Defense
-author = vatheryl
-version = 0.1
+author = Vatheryl
+version = 1.0
 
 hideCode = false
 hideResources = false
 
-includePDB = true
 includeSource = true

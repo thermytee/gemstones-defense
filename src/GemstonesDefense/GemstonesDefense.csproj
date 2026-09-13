@@ -1,12 +1,1 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <Import Project="../../build/Mod.Build.targets"/>
-
-    <PropertyGroup>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Nullable>enable</Nullable>
-        <LangVersion>12</LangVersion>
-        <TargetFramework>net8.0</TargetFramework>
-    </PropertyGroup>
-
-</Project>
+<Project Sdk="Tomat.Terraria.ModLoader.Sdk/2.1.1" />

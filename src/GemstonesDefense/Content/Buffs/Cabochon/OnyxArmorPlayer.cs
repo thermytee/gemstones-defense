@@ -1,4 +1,4 @@
-using GemstonesDefense.Content.Items.Cabochon;
+using GemstonesDefense.Content.Cabochon;
 using GemstonesDefense.Utilities;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;

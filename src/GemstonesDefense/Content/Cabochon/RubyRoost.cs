@@ -1,14 +1,67 @@
-using GemstonesDefense.Content.Buffs;
-using GemstonesDefense.Content.Buffs.Cabochon;
 using Terraria.GameContent;
 
-namespace GemstonesDefense.Content.Projectiles;
+namespace GemstonesDefense.Content.Cabochon;
+
+public class RubyRoostItem : ModItem
+{
+    public override void SetDefaults()
+    {
+        base.SetDefaults();
+
+        Item.noUseGraphic = true;
+        Item.noMelee = true;
+
+        Item.width = 32;
+        Item.height = 30;
+
+        Item.useTime = 25;
+        Item.useAnimation = 25;
+        Item.UseSound = SoundID.Item2;
+        Item.useStyle = ItemUseStyleID.Swing;
+
+        Item.buffTime = 3600;
+        Item.buffType = ModContent.BuffType<OnyxOwlBuff>();
+
+        Item.shoot = ModContent.ProjectileType<OnyxOwlProjectile>();
+    }
+
+    public override void AddRecipes()
+    {
+        base.AddRecipes();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.Ruby, 10)
+            .AddIngredient(ItemID.Diamond)
+            .AddTile(TileID.Anvils)
+            .Register();
+    }
+}
+
+public class OnyxOwlBuff : ModBuff
+{
+    public override void SetStaticDefaults()
+    {
+        base.SetStaticDefaults();
+
+        Main.buffNoTimeDisplay[Type] = true;
+        Main.lightPet[Type] = true;
+    }
+
+    public override void Update(Player player, ref int buffIndex)
+    {
+        base.Update(player, ref buffIndex);
+
+        var unused = false;
+
+        player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<OnyxOwlProjectile>());
+    }
+}
 
 public class OnyxOwlProjectile : ModProjectile
 {
-    private Player Owner => Main.player[Projectile.owner];
+    public Player Owner => Main.player[Projectile.owner];
 
-    private ref float Timer => ref Projectile.ai[0];
+    public ref float Timer => ref Projectile.ai[0];
 
     public override void SetStaticDefaults()
     {
@@ -37,12 +90,9 @@ public class OnyxOwlProjectile : ModProjectile
 
         Projectile.aiStyle = -1;
     }
-    
-    public override bool OnTileCollide(Vector2 oldVelocity)
-    {
-        return false;
-    }
 
+    public override bool OnTileCollide(Vector2 oldVelocity) => false;
+    
     public override void AI()
     {
         base.AI();

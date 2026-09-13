@@ -1,0 +1,31 @@
+﻿<Project>
+    <PropertyGroup>
+        <AssemblyName>GemstonesDefense</AssemblyName>
+        <RootNamespace>GemstonesDefense</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TmlBuildBootstrapFeatures>tomat.environmentmodlist;tomat.enablemod;lolxd87.splashskip;tomat.assethotreloading;ppeb.netcoredbg</TmlBuildBootstrapFeatures>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Publicize Include="tModLoader;FNA;ReLogic" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="System"/>
+        <Using Include="Terraria"/>
+        <Using Include="Terraria.ID"/>
+        <Using Include="Terraria.ModLoader"/>
+        <Using Include="Microsoft.Xna.Framework"/>
+        <Using Include="Microsoft.Xna.Framework.Graphics"/>
+    </ItemGroup>
+</Project>

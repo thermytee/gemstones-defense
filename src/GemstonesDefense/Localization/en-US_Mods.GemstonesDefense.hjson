@@ -57,10 +57,10 @@ Items: {
 		DisplayName: Cabochon Heavy Blade
 		Tooltip: ""
 	}
-	
+
 	OnyxItem: {
-	    DisplayName: Onyx
-	    Tooltip: ""
+		DisplayName: Onyx
+		Tooltip: ""
 	}
 }
 
@@ -89,6 +89,7 @@ Buffs: {
 Projectiles: {
 	RubyRoostProjectile.DisplayName: Ruby Roost
 	OnyxOwlProjectile.DisplayName: Onyx Owl
+	CabochonBladeProjectile.DisplayName: Cabochon Blade Projectile
 }
 
 Recipes.Groups.GoldBar: Gold Bar

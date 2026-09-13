@@ -1,5 +1,6 @@
 using GemstonesDefense.Common.Recipes;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 
 namespace GemstonesDefense.Content.Cabochon;
 
@@ -150,7 +151,25 @@ public class CabochonBladeProjectile : ModProjectile
     /// <inheritdoc/> 
     public override bool PreDraw(ref Color lightColor)
     {
-        return true;
+        var texture = TextureAssets.Projectile[Type].Value;
+
+        var direction = Projectile.spriteDirection;
+        var left = direction == -1;
+        
+        var origin = new Vector2(left ? texture.Width : 0f, texture.Height);
+        
+        float drawRotation = Projectile.rotation + (left ? MathHelper.PiOver4 * 3f : MathHelper.PiOver4);
+        
+        var offset = new Vector2(0f, 8f);
+        var position = Player.Center - Main.screenPosition + new Vector2(DrawOffsetX, Projectile.gfxOffY) - offset;
+        
+        var color = Projectile.GetAlpha(lightColor);
+        
+        var effects = left ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+        
+        Main.EntitySpriteDraw(texture, position, null, color, Projectile.rotation, origin, Projectile.scale, effects);
+        
+        return false;
     }
 }
 

@@ -34,10 +34,7 @@ public static class PlayerExtensions
     /// <param name="player">The player to check.</param>
     /// <returns><c>true</c> if the player has just double tapped up; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool JustDoubleTappedUp(this Player player)
-    {
-        return player.controlUp && player.releaseUp && player.doubleTapCardinalTimer[1] < 15;
-    }
+    public static bool JustDoubleTappedUp(this Player player) => player.controlUp && player.releaseUp && player.doubleTapCardinalTimer[1] < 15;
 
     /// <summary>
     ///     Checks whether the player has just landed on a solid surface or not.
@@ -45,8 +42,5 @@ public static class PlayerExtensions
     /// <param name="player">The player to check.</param>
     /// <returns><c>true</c> if the player has just landed on a solid surface; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool JustLanded(this Player player)
-    {
-        return player.velocity.Y == 0f && player.oldVelocity.Y != 0f;
-    }
+    public static bool JustLanded(this Player player) => player.velocity.Y == 0f && player.oldVelocity.Y != 0f;
 }
